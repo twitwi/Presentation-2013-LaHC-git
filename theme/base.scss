@@ -1,0 +1,248 @@
+
+.deck-container {
+    background: white;
+    font-family: Arial, sans-serif;
+
+    >.slide h1 {
+        color: darkred;
+        font-size: 32px;
+        text-align: center;
+        margin-top: 200px;
+    }
+    
+    >.slide>ul {
+        font-size: 150%;
+    }
+
+    >.slide>ul>li {
+        margin-top: 0.5em;
+    }
+
+    >.slide:not(.title-slide) h2 {
+        font-size: 26px;
+        border-bottom: 3px solid darkred;
+    }
+
+    >.slide.bigpoints>ul {
+        font-size: 200%;
+        line-height: 300%;
+    }
+
+    >.title-slide>ul {
+        text-align: center;
+    }
+
+    >.title-slide>ul>li {
+        list-style: none;
+    }
+
+    >.slide>h2 {
+        margin-top: 0px;
+        padding: 7px;
+    }
+
+    >.overview>h2 {
+        background: black;
+        color: white;
+    }
+
+    blockquote {
+        border: 1px solid darkgrey;
+        border-radius: 5px;
+        padding: 0;
+        font-size: 30px;
+        font-style: italic;
+    }
+    blockquote p {
+        margin: 0;
+        padding: 30px;
+    }
+    blockquote p cite {
+        font-size: 20px;
+    }
+
+
+    /* custom styles */
+    >.slide li.no {
+        list-style: none;
+    }
+
+    >.slide li.re {
+        list-style: none;
+        margin-left: -.7em;
+    }
+    
+    .floatright { float: right; }
+    .floatleft { float: left; }
+    
+    >.slide.illustrations-left .illustrations {float: left;}
+    >.slide.illustrations-left>ul {display: inline-block;}
+
+    >.slide.spec b {color: darkblue; font-family: monospace; font-weight: normal; border: 1px solid #77F; padding: 1px 3px;}
+
+    >.slide .grey {opacity: .7;}
+}
+
+
+/* comments */
+.deck-container:not(.deck-globalscale) /* maybe condition on comment visibility */ {
+    >.slide {
+        overflow: visible;
+    }
+    div.comment, .comment {
+        transform: translate(400px,0);
+        -webkit-transform: translate(400px,0);
+        z-index: 1000;
+        /* might need theme specific thing here */
+        background-color: yellow; /* force opaque... */
+        color: darkred;
+    }
+    .hasSVG .comment {
+        transform: none;
+        -webkit-transform: none;
+    }
+}
+.deck-container>.slide {
+    body:not(.has-clones):not(.show-comments) & .comment{ display: none;}
+    body:not(.has-clones):not(.show-comments) & .showwhencomment{ display: none;}
+    div.comment {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        $w: 500px;
+        $h: 20px;
+        /*outline: 1px solid red;*/
+        border-radius: 3px;
+        
+        color: darkred;
+        background: rgba(255,255,128, .7);
+        
+        /*        opacity: .8;*/
+        font-size: 14px;
+        line-height: initial;
+        padding: 1px 15px;
+        width: auto;//$w;
+        height: $h;
+        margin: 0;
+        margin-left: 100px;
+        margin-top: -$h*.33;
+        margin-bottom: -$h*.66;
+        z-index: -1;
+        
+        &.small {
+            width: 120px;
+            margin-left: -100px;
+        }
+        &.twolines {
+            height: 2*$h;
+            margin-top: -$h*2/3;
+            margin-bottom: -$h*4/3;
+        }
+    }
+}
+
+.deck-container.show-all-slides {
+	.slide {
+	        /*background:#eee;*/
+		position:relative;
+		left:0;
+		top:0;
+		visibility:visible;
+                display: block;
+		cursor:pointer;
+	}
+	> .slide {
+		.no-csstransforms & {
+			float:left;
+			width:22%;
+			height:22%;
+			min-height:0;
+			margin:1%;
+			font-size:0.22em;
+			overflow:hidden;
+			padding:0 0.5%;
+		}
+		
+		.csstransforms & {
+			-webkit-transform:scale(.22) !important;
+			-moz-transform:scale(.22) !important;
+			-o-transform:scale(.22) !important;
+			-ms-transform:scale(.22) !important;
+			transform:scale(.22) !important;
+			-webkit-transform-origin:0 0;
+			-moz-transform-origin:0 0;
+			-o-transform-origin:0 0;
+			-ms-transform-origin:0 0;
+			transform-origin:0 0;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			width:100%;
+			height:100%;
+			overflow:hidden;
+			padding:0 48px;
+			margin:12px;
+		}
+	}
+	
+
+/*	
+    .slide {
+        visibility: visible;
+		.csstransforms & {
+			-webkit-transform:scale(.22) !important;
+			-moz-transform:scale(.22) !important;
+			-o-transform:scale(.22) !important;
+			-ms-transform:scale(.22) !important;
+			transform:scale(.22) !important;
+			-webkit-transform-origin:0 0;
+			-moz-transform-origin:0 0;
+			-o-transform-origin:0 0;
+			-ms-transform-origin:0 0;
+			transform-origin:0 0;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			width:100%;
+			height:100%;
+			overflow:hidden;
+			padding:0 48px;
+			margin:12px;
+		}
+        display: inline-block;
+        width:80px;
+        height:60px;
+        outline: 10px solid red;
+    }*/
+}
+
+
+/* loading */
+.deck-container:not(.deck-anim-ready) * {
+  visibility: hidden; }
+.deck-container:not(.deck-anim-ready) .deck-loading-splash {
+  visibility: visible; }
+.deck-container.deck-anim-ready .deck-loading-splash {
+  visibility: hidden;
+  opacity: 0;
+  /*
+      right: 100%;
+      left: -100%;
+  */
+  -webkit-transition: visibility 0s linear 0.4s, opacity 0.4s linear, left 0.4s linear, right 0.4s linear;
+  transition: visibility 0s linear 0.4s, opacity 0.4s linear, left 0.4s linear, right 0.4s linear; }
+.deck-container .deck-loading-splash {
+  visibility: visible;
+  opacity: 1;
+  position: absolute;
+  text-align: center;
+  padding-top: 200px;
+  display: flex;
+  margin: 0 auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: black;
+  color: white;
+  z-index: 100; }

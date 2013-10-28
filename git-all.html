@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+
+        <!-- PROVIDE METADATA -->
+        <!-- ================ -->
+        <title>Introduction to Version Control with “git” and git for Paper Writing</title>
+        <meta name="author" content="Rémi Emonet">
+
+        <!-- override some style here if needed (or in an external file) -->
+        <style type="text/css">
+/*.deck-container .slide {background: black;}
+.deck-container {color: white;}
+h1 {text-shadow: black .05em .05em .05em, white .05em .05em .2em;}
+h2 {text-shadow: red .05em .05em .05em, gray .05em .05em .2em;}
+
+h3 {text-shadow: black .05em .05em .05em, red .05em .05em .2em;}
+.currentSlide .slide.outline h3 {color:#F00; background: #AAA; text-shadow: black .05em .05em .05em, red .05em .05em .2em;}
+*/
+
+.slide pre {padding-left: .5em; border-color: darkslateblue;}
+
+pre.smaller {font-size: .85em;}
+em.smaller {font-size: .80em;}
+
+pre, em {background: #001; color: #0F0;}
+em {font-family: monospace; font-style: normal; padding-left: .3em; padding-right: .3em;}
+
+b {text-decoration: underline; text-shadow: grey .05em .05em .05em, yellow .05em .05em .1em, yellow .05em .05em .2em; font-size: 1.25em;}
+
+.clonepointer {display:none;}
+.deck-status {font-size:50%;}
+.deck-container {overflow: auto;}
+.deck-container {
+    width: 100%; height: 100%; /* to get a proper filling of the parent */
+    margin: 0; padding: 0; /* any margin is handled by the parent or the fit extension */
+    position: absolute;
+    left:0; top:0; width:100%; height:100%;
+    border: 0;
+}
+/*html, body {height:100%;}*/
+
+.deck-container {
+    background: black;
+}
+.deck-container>.slide {
+    background: white;
+    float: left;
+    width: 800px; height: 600px;
+    border: 6px solid black;
+    margin: 0px;
+    -webkit-transform: scale(.5,.5);
+    transform: scale(.5,.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    margin-bottom: -300px;
+    margin-right: -400px;
+}
+.slide.RED {border-color: red;}
+.slide pre {background: lightgreen; color: black;}
+        </style>
+	<script src="../deck.js-2013-10-03/extensions/includedeck/load.js"></script>
+        <script>
+            // includedeck("smartsyntax fit-fs simplemath clone goto status navigation menu hash step events anim svg");
+            // includedeck(["@_newdeck", "@_smartsyntax", "@_fit-fs", "@_simplemath", "@_clone", "@_goto", "@_status", "@_navigation", "@_menu", "@_hash", "@_step", "@_events", "@_anim", "@_svg"]);
+            // includedeck("profile-1");
+            includedeck([
+                         "theme/base.css"
+                        ], {
+               dummy: ""
+            })
+
+        </script>
+    </head>
+
+
+<body>
+
+<div class="deck-container show-grided-slides on-slide-49 on-slide-slide-49 deck-anim-ready">
+
+ <!-- this presentation uses smart syntax -->
+<section class="smart"></section><section id="slide-0" class="slide deck-before"><h1><span class="var-title">Introduction to Version Control with “git” and git for Paper Writing</span></h1></section><section id="slide-1" class="slide deck-before"><h2>Objective of the Presentation</h2><ul><li> Version Control Systems<ul><li> concepts</li><li> “rules”</li></ul></li><li id="slide-2" class="slide deck-before"> Practical Git<ul><li> basic knowledge</li><li> writing a latex paper</li></ul></li><li id="slide-3" class="slide deck-before"> <b>Interrupt me when necessary!</b></li></ul></section><section id="slide-4" class="slide deck-before"><h2>Survey</h2><ul><li> Who already knows Git?</li><br> <li id="slide-5" class="slide deck-before"> Who knows any of these?<ul><li> CVS, Subversion,</li><li> Mercurial, Baz, GnuArch</li></ul></li></ul></section><section id="slide-6" class="RED slide deck-before"><h2>Background</h2><ul><li> Warning: not a Git guru<ul><li> for <a href="http://www.youtube.com/watch?v=4XpnKHJAok8">Git by a git</a>, ask Linus Torvald</li><li> the <a href="http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html">gittutorial</a></li><li> the <a href="http://git-scm.com/book">Pro Git book</a> (available online)</li><li> <a href="http://vimeo.com/14629850">presentation with a lot of illustrations and animations</a> (branching etc)</li><li> many other resources on the web</li></ul></li><li id="slide-7" class="slide deck-before"> My trajectory<ul><li> cp</li><li> date</li><li> tar</li><li> “rameute.sh”</li><li> (mail/diff)</li><li id="slide-8" class="slide deck-before"> cvs, svn, GnuArch, bazaar</li><li id="slide-9" class="slide deck-before"> git</li></ul></li></ul></section><section id="slide-10" class="slide deck-before"><h2>Why Version Control, Why Git</h2><ul><li> Version Control<ul><li> keeps track of history</li><li> branching</li><li> helps when merging</li></ul></li><li id="slide-11" class="slide deck-before"> Git<ul><li> distributed</li><li> local repository</li><li> fast</li></ul></li><li id="slide-12" class="slide deck-before"> Limitations<ul><li> binary files (no diff)</li></ul></li></ul></section><section id="slide-13" class="slide outline deck-before"><h2></h2><h3>Outline</h3> <ul><li> Introduction ✓</li><li> Starting with Git</li><li> Schyzophrenic Git</li><li> Multi-authoring</li></ul></section><section id="slide-14" class="slide deck-before"><h2>Starting with Git</h2><ul><li> Initializing your project <br><pre>git init</pre></li><li id="slide-15" class="slide deck-before"> What's up? <br><pre>git status</pre></li><li id="slide-16" class="slide deck-before"> Deciding what is relevant <br> <pre>git add file1 file2 …<br>git commit</pre></li></ul></section><section id="slide-17" class="slide deck-before"><h2>Let's try it</h2><ul><li></li>  <pre>cp -r base mypaper ; cd mypaper
+  
+  git init
+  
+  git status
+  git add     mypaper.tex  cvpr.sty
+  git status
+  git commit
+  git status
+  
+  ... and more
+  </pre>
+ </ul></section><section id="slide-18" class="slide deck-before"><h2>Recap</h2><ul><li> Beginning</li><pre>git init<br>git add ...<br>git commit [-m ...]</pre> <li> Working</li><pre>git status<br>git add ...<br>git commit [-m ...]</pre> </ul></section><section id="slide-19" class="slide deck-before"><h2>Recap 2</h2><ul><li> Clean projects: ignoring files<ul><li> <em>.gitignore</em> file(s)</li><li> <em>blabla.*</em>, <em>!blabla.my_precious</em>, <em>*~</em></li></ul></li><li> What did I just modify?</li><pre>git status<br>git diff [...]</pre> <li> What happened?</li><pre>git log</pre> </ul></section><section id="slide-20" class="slide deck-before"><h2>Nota Bene (vs CVS, Subversion)</h2><ul><li> Local commit<ul><li> commit everywhere (train, plane, here)</li><li> merge with 0-stress</li><li> ! backup</li></ul></li><li> By-project commit</li><li> Need to “<em>git add</em>” modifications</li></ul></section><section id="slide-21" class="slide deck-before"><h2>GUI for Git</h2><ul><li> Bundled with git: <em>git gui</em></li><img src="images/git-gui.png" width="550px"> <li> Many others (qgit, GitX, tortoisegit)</li></ul></section><section id="slide-22" class="slide deck-before"><h2>Customizing Git</h2><ul><li> Introducing yourself</li><pre class="smaller">git config --global user.name  "John Doe"<br>git config --global user.email john@doe.com</pre> <li> Fancy colors and shortcuts</li><pre>git config --global color.ui true<br><br>git config --global alias.st status<br>git config --global alias.ci commit</pre> <li> Configuration in <em>~/.gitconfig</em></li></ul></section><section id="slide-23" class="slide outline deck-before"><h2></h2><h3>Outline</h3> <ul><li> Introduction ✓</li><li> Starting with Git ✓</li><li> Schyzophrenic Git</li><li> Multi-authoring</li></ul></section><section id="slide-24" class="slide deck-before"><h2>About History</h2><ul><li> Remember <em>git log</em>?</li><li id="slide-25" class="slide deck-before"> Each commit is written in stone<ul><li> parent(s) commit</li><li> modifications</li><li> sha1sum (e.g. &nbsp;&nbsp;&nbsp;cb6dc3cb1f4f5eb15c1d9b2b25ae741cd73c0554)</li><br> <li id="slide-26" class="slide deck-before"> can be diff'ed against <br><pre>git diff cb6dc3</pre></li><li id="slide-27" class="slide deck-before"> can be retreived <br><pre>git checkout cb6dc3</pre></li></ul></li></ul></section><section id="slide-28" class="slide deck-before"><h2>Back to the Future: rewriting the past</h2><ul><li> <em>gitk</em>, the “git gui” of history</li><li> Let's go…</li></ul></section><section id="slide-29" class="slide deck-before"><h2>Recap</h2><ul><li> Branch<ul><li> label for a commit</li><li> automatically follows on commit</li></ul></li><li> Always commit before merging</li><li> Use of “sha1” or branch-name (e.g. brrrr)</li><li> Shortcuts</li><pre>cb6dc3, brrrr, HEAD,<br>HEAD^, HEAD^^, HEAD^1, HEAD^42<br>cb6dc3^42, tagggg</pre> </ul></section><section id="slide-30" class="slide deck-before"><h2>Recap 2</h2><ul><li> Moving in the history</li><pre>git checkout sha1-or-branch-name</pre> <li> Creating a new branch at current position</li><pre>git checkout -b new-branch-name</pre> <li> Merging “brrrr” into “master”</li><pre>git checkout master<br>git merge brrrr</pre> </ul></section><section id="slide-31" class="slide deck-before"><h2>Recap 3</h2><ul><li> Automatic <em>git merge</em>&nbsp;⇒&nbsp;automatic&nbsp;commit</li><li> On conflicting <em>git merge</em><ul><li> (partial merge)</li><li> solve conflict</li><li> <em>git add</em></li><li> <em>git commit</em></li><br> </ul></li><li> Exploring history<ul><li> <em>git log</em></li><li> <em>gitk [--all]</em></li></ul></li></ul></section><section id="slide-32" class="slide outline deck-before"><h2></h2><h3>Outline</h3> <ul><li> Introduction ✓</li><li> Starting with Git ✓</li><li> Schyzophrenic Git ✓</li><li> Multi-authoring</li></ul></section><section id="slide-33" class="slide deck-before"><h2>Following a Repository</h2><ul><li id="slide-34" class="slide deck-before"> Getting a full copy of a repository <pre>git clone ~bob/repo/papier [mypaper]</pre></li><li id="slide-35" class="slide deck-before"> Pulling latest modifications <br>&nbsp;&nbsp;(like “cvs/svn update”) <br><pre>git pull [origin master]</pre></li><li id="slide-36" class="slide deck-before"> Pulling = fetch + merge <br> <pre>git fetch<br>git merge</pre></li></ul></section><section id="slide-37" class="slide deck-before"><h2>Distributed Version Control System</h2><ul><li> Full local repository<ul><li> in-plane commit</li><li> 0-stress merge</li></ul></li><li id="slide-38" class="slide deck-before"> Pull (fetch+merge)<ul><li> from the “origin”</li><pre>git pull</pre> <li> from any “remote”</li><pre>git remote add john-repo ~john/…</pre> <pre>git pull john-repo master<br>git pull john-repo experiment</pre> </ul></li></ul></section><section id="slide-39" class="slide deck-before"><h2>Creating a Shared “Centralized” Repository</h2><ul><li> Concepts<ul><li> “bare” repository (no classical files)</li><li> “shared” access</li></ul></li><li> From scratch</li><pre>git --bare init --shared=group</pre> <li> From an existing repository</li><pre class="smaller">git clone --bare /home/john/repo/cvpr [...]<br>cd ....<br>git config core.sharedRepository group</pre> </ul></section><section id="slide-40" class="slide deck-before"><h2>Contributing to a Shared Repository</h2><ul><li> Init: <em>git clone ...</em></li><li> Hack hack hack</li><li id="slide-41" class="slide deck-before"> <em class="smaller">git commit</em> hack <em class="smaller">git commit</em> hack <em class="smaller">git commit</em></li><li id="slide-42" class="slide deck-before"> Merge and solve conflicts: <em>git pull</em></li><li id="slide-43" class="slide deck-before"> Share: <em>git push [origin master]</em></li><li id="slide-44" class="slide deck-before"> (see also: <em>git rebase</em>)</li></ul></section><section id="slide-45" class="slide deck-before"><h2>Team Work</h2><ul><li> Distributed or Centralized?</li><li> Shared branches?</li><li id="slide-46" class="slide deck-before"> Never break the “master”</li><li id="slide-47" class="slide deck-before"> File formatting<ul><li> do not reformat sources (.tex, ...)</li><li> 1 sentence = 1 line ?</li><li> avoid double-spaces</li></ul></li></ul></section><section id="slide-48" class="slide deck-child-current deck-previous"><h2>Last Git Things</h2><ul class="deck-child-current"><li> Working Over the Network<ul><li> nfs</li><li> ssh, http, “git”</li><li> svn, cvs</li><br> </ul></li><li id="slide-49" class="slide deck-current"> Reminder<ul><li> always commit before merge</li><li> backup your repository (NAS ✓)</li></ul></li></ul></section><section id="slide-50" class="slide outline deck-next"><h2></h2><h3>Outline</h3> <ul><li> Introduction ✓</li><li> Starting with Git ✓</li><li> Schyzophrenic Git ✓</li><li> Multi-authoring ✓</li><li id="slide-51" class="slide deck-after"> Next?</li></ul></section><section id="slide-52" class="RED slide deck-after"><h2>A git “Template” for Papers</h2><ul><li> Usual tasks<ul><li> build, …</li><li> diff, export</li></ul></li><li> <pre>git clone https://github.com/twitwi/ResearchTipsAndTricks.git</pre></li></ul></section><section id="slide-53" class="slide deck-after"><h1>The End</h1></section>
+
+<!-- end of the presentation -->
+
+
+
+
+</div>
+
+ <div xml:base="../common/histats.html"><script type="text/javascript">var _Hasync= _Hasync|| [];
+_Hasync.push(['Histats.start', '1,1148852,4,0,0,0,00010000']);
+_Hasync.push(['Histats.fasi', '1']);
+_Hasync.push(['Histats.track_hits', '']);
+(function() {
+var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+hs.src = ('http://s10.histats.com/js15_as.js');
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
+})();
+    </script><noscript><a href="http://www.histats.com" target="_blank"><img src="http://sstatic1.histats.com/0.gif?1148852&amp;101" alt="free web tracker" border="0"></img></a></noscript><a title="Web Analytics" href="http://getclicky.com/66620997"></a><script type="text/javascript">
+var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(66620997);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+</script><noscript>
+            <p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/66620997ns.gif"></img></p>
+         </noscript>
+      </div>
+</body>
+</html>
